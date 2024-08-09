@@ -1,7 +1,7 @@
 "use client";
 
 import React, { useState, useEffect } from "react";
-import { listMealCategories, getMealsByCategory } from "../../api/mealAPIs";
+import { listMealCategories, getMealsByCategory } from "../api/mealAPIs";
 import RecipeCard from "./RecipeCard";
 
 const Category: React.FC = () => {
@@ -56,7 +56,7 @@ const Category: React.FC = () => {
           id="category"
           value={selectedCategory}
           onChange={handleCategoryChange}
-          className="w-full p-2 border border-gray-300 rounded"
+          className="w-full p-3 border border-gray-300 rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500"
         >
           <option value="">Select a category</option>
           {categories.map((category) => (

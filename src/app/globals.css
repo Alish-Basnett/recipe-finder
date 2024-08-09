@@ -2,32 +2,37 @@
 @tailwind components;
 @tailwind utilities;
 
-:root {
-  --foreground-rgb: 0, 0, 0;
-  --background-start-rgb: 214, 219, 220;
-  --background-end-rgb: 255, 255, 255;
-}
+/* Background Gradient Animation */
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --foreground-rgb: 255, 255, 255;
-    --background-start-rgb: 0, 0, 0;
-    --background-end-rgb: 0, 0, 0;
-  }
+@keyframes gradient {
+    0% {
+        background-position: 0% 0%;
+    }
+    50% {
+        background-position: 100% 100%;
+    }
+    100% {
+        background-position: 0% 0%;
+    }
 }
 
 body {
-  color: rgb(var(--foreground-rgb));
-  background: linear-gradient(
-      to bottom,
-      transparent,
-      rgb(var(--background-end-rgb))
-    )
-    rgb(var(--background-start-rgb));
+    @apply bg-gradient-to-r from-blue-500 via-purple-500 to-pink-500;
+    background-size: 200% 200%;
+    animation: gradient 5s ease infinite;
+    /* Faster animation */
+    color: rgb(var(--foreground-rgb));
+    font-family: "Inter", sans-serif;
+    line-height: 1.6;
 }
 
-@layer utilities {
-  .text-balance {
-    text-wrap: balance;
-  }
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+h1,
+h2,
+h3 {
+    color: #2d3748;
 }
