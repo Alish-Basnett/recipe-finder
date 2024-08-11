@@ -1,17 +1,21 @@
 "use client";
 
 import React, { useState } from "react";
+import Link from "next/link";
 import SearchBar from "../components/SearchBar";
 import RecipeCard from "../components/RecipeCard";
 import { searchMealsByName } from "../api/mealAPIs";
 import Category from "../components/Category";
 import Navbar from "../components/Navbar";
+import { Modal, Button } from "antd";
+import MakeYourOwnRecipe from "@/components/MakeYourOwnRecipe";
 
 const Home: React.FC = () => {
   const [searchQuery, setSearchQuery] = useState("");
   const [recipes, setRecipes] = useState<any[]>([]);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
+  const [isModalVisible, setIsModalVisible] = useState(false);
 
   const handleSearch = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -28,8 +32,16 @@ const Home: React.FC = () => {
     }
   };
 
+  const showModal = () => {
+    setIsModalVisible(true);
+  };
+
+  const handleCancel = () => {
+    setIsModalVisible(false);
+  };
+
   return (
-    <div className="relative min-h-screen">
+    <div className="relative min-h-screen bg-gradient-to-r from-blue-500 via-purple-500 to-pink-500 bg-fixed bg-cover bg-center animate-gradient">
       <Navbar />
       <main className="pt-20 px-4 py-8">
         <h1 className="text-4xl font-bold text-center mb-8 text-white">
@@ -54,7 +66,29 @@ const Home: React.FC = () => {
             <p className="text-center text-white">No recipes found.</p>
           )}
         </div>
+
+        {/* "Make Your Own Recipe" Button */}
+        <div className="flex justify-center mt-16">
+          <Button
+            type="primary"
+            onClick={showModal}
+            className="bg-yellow-500 hover:bg-yellow-600 text-white font-bold py-3 px-6 rounded-full shadow-lg transition-colors duration-300"
+          >
+            Make Your Own Recipe
+          </Button>
+        </div>
       </main>
+
+      {/* Modal for "Make Your Own Recipe" */}
+      <Modal
+        title="Create Your Own Recipe"
+        visible={isModalVisible}
+        onCancel={handleCancel}
+        footer={null}
+        width={800}
+      >
+        <MakeYourOwnRecipe />
+      </Modal>
     </div>
   );
 };

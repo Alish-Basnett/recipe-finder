@@ -1,9 +1,10 @@
 import axios from "axios";
+import { Meal } from "../types/types"; // Adjust the path as needed
 
 const API_BASE_URL = "https://www.themealdb.com/api/json/v1/1";
 
 // Search meals by name
-export const searchMealsByName = async (query: string) => {
+export const searchMealsByName = async (query: string): Promise<Meal[]> => {
   try {
     const response = await axios.get(`${API_BASE_URL}/search.php?s=${query}`);
     return response.data.meals || [];
@@ -14,7 +15,9 @@ export const searchMealsByName = async (query: string) => {
 };
 
 // List all meals by first letter
-export const listMealsByFirstLetter = async (letter: string) => {
+export const listMealsByFirstLetter = async (
+  letter: string
+): Promise<Meal[]> => {
   try {
     const response = await axios.get(`${API_BASE_URL}/search.php?f=${letter}`);
     return response.data.meals || [];
@@ -25,7 +28,7 @@ export const listMealsByFirstLetter = async (letter: string) => {
 };
 
 // Lookup full meal details by ID
-export const lookupMealById = async (id: string) => {
+export const lookupMealById = async (id: string): Promise<Meal | null> => {
   try {
     const response = await axios.get(`${API_BASE_URL}/lookup.php?i=${id}`);
     return response.data.meals ? response.data.meals[0] : null;
@@ -36,7 +39,7 @@ export const lookupMealById = async (id: string) => {
 };
 
 // Lookup a single random meal
-export const getRandomMeal = async () => {
+export const getRandomMeal = async (): Promise<Meal | null> => {
   try {
     const response = await axios.get(`${API_BASE_URL}/random.php`);
     return response.data.meals ? response.data.meals[0] : null;
@@ -47,7 +50,7 @@ export const getRandomMeal = async () => {
 };
 
 // List all meal categories
-export const listMealCategories = async () => {
+export const listMealCategories = async (): Promise<any[]> => {
   try {
     const response = await axios.get(`${API_BASE_URL}/categories.php`);
     return response.data.categories || [];
@@ -58,7 +61,9 @@ export const listMealCategories = async () => {
 };
 
 // Filter meals by main ingredient
-export const filterMealsByIngredient = async (ingredient: string) => {
+export const filterMealsByIngredient = async (
+  ingredient: string
+): Promise<Meal[]> => {
   try {
     const response = await axios.get(
       `${API_BASE_URL}/filter.php?i=${ingredient}`
@@ -71,7 +76,7 @@ export const filterMealsByIngredient = async (ingredient: string) => {
 };
 
 // Filter meals by category
-export const getMealsByCategory = async (category: string) => {
+export const getMealsByCategory = async (category: string): Promise<Meal[]> => {
   try {
     const response = await axios.get(
       `${API_BASE_URL}/filter.php?c=${category}`
@@ -84,7 +89,7 @@ export const getMealsByCategory = async (category: string) => {
 };
 
 // Filter meals by area
-export const filterMealsByArea = async (area: string) => {
+export const filterMealsByArea = async (area: string): Promise<Meal[]> => {
   try {
     const response = await axios.get(`${API_BASE_URL}/filter.php?a=${area}`);
     return response.data.meals || [];

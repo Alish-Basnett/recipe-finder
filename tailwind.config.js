@@ -1,5 +1,4 @@
 /** @type {import('tailwindcss').Config} */
-const gradients = require("tailwindcss-gradients");
 module.exports = {
   content: [
     "./src/app/**/*.{js,ts,jsx,tsx}",

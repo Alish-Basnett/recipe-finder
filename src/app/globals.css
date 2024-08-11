@@ -1,3 +1,5 @@
+/* globals.css or tailwind.css */
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
@@ -13,6 +15,14 @@
     }
     100% {
         background-position: 0% 0%;
+    }
+}
+
+@layer utilities {
+    .animate-gradient {
+        background: linear-gradient(45deg, #ff6b6b, #f06595, #fcf79f, #00d2d3);
+        background-size: 600% 600%;
+        animation: gradient 10s ease infinite;
     }
 }
 
