@@ -1,6 +1,7 @@
 {
   "compilerOptions": {
-    "lib": ["dom", "dom.iterable", "esnext"],
+    "target": "ES2015", // Update target to ES2015 or higher
+    "lib": ["dom", "dom.iterable", "esnext"], // You may keep "esnext" for modern features
     "allowJs": true,
     "skipLibCheck": true,
     "strict": true,
@@ -20,7 +21,8 @@
     ],
     "paths": {
       "@/*": ["./src/*"]
-    }
+    },
+    "downlevelIteration": true // Enable downlevel iteration
   },
   "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", ".next/types/**/*.ts"],
   "exclude": ["node_modules"]

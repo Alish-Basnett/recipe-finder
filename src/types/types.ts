@@ -50,4 +50,5 @@ export interface Meal {
   strMeasure20?: string | null;
   strSource?: string | null;
   dateModified?: string | null;
+  [key: string]: string | string[] | null | undefined; // Index signature for dynamic properties
 }

@@ -75,6 +75,18 @@ export const filterMealsByIngredient = async (
   }
 };
 
+export const checkIngredientInMeals = async (
+  ingredient: string
+): Promise<boolean> => {
+  try {
+    const meals = await filterMealsByIngredient(ingredient);
+    return meals.length > 0;
+  } catch (error) {
+    console.error("Error checking ingredient in meals:", error);
+    throw error;
+  }
+};
+
 // Filter meals by category
 export const getMealsByCategory = async (category: string): Promise<Meal[]> => {
   try {
