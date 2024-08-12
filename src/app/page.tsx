@@ -141,7 +141,6 @@ const Home: React.FC = () => {
           <div className="w-full max-w-4xl">
             <MakeYourOwnRecipe
               recipes={searchRecipes}
-              // onRecipeClick={handleRecipeClick}
               searchQuery={myOwnRecipeQuery}
               setSearchQuery={setMyOwnRecipeQuery}
               handleSearch={handleMyOwnRecipeSearch}
@@ -150,7 +149,10 @@ const Home: React.FC = () => {
         </div>
 
         <div className="mb-6">
-          <div className="overflow-hidden flex items-center space-x-4">
+          <div
+            className="overflow-x-auto whitespace-nowrap flex items-center space-x-4 scrollbar-hide"
+            style={{ scrollbarWidth: "none", msOverflowStyle: "none" }}
+          >
             {categories.map((category) => (
               <button
                 key={category}
