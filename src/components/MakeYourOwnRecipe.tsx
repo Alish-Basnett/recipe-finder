@@ -192,7 +192,13 @@ const MakeYourOwnRecipe: React.FC<MakeYourOwnRecipeProps> = ({
 
       <div className="recipe-list grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 mt-8">
         {meals.map((meal) => (
-          <RecipeCard key={meal.idMeal} recipe={meal} />
+          <RecipeCard
+            key={meal.idMeal}
+            recipe={meal}
+            onClick={function (): void {
+              throw new Error("Function not implemented.");
+            }}
+          />
         ))}
       </div>
     </div>

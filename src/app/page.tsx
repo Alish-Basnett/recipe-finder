@@ -136,17 +136,15 @@ const Home: React.FC = () => {
               searchQuery={searchQuery}
               setSearchQuery={setSearchQuery}
               handleSearch={handleSearch}
-              className="w-full"
             />
           </div>
           <div className="w-full max-w-4xl">
             <MakeYourOwnRecipe
               recipes={searchRecipes}
-              onRecipeClick={handleRecipeClick}
+              // onRecipeClick={handleRecipeClick}
               searchQuery={myOwnRecipeQuery}
               setSearchQuery={setMyOwnRecipeQuery}
               handleSearch={handleMyOwnRecipeSearch}
-              className="w-full"
             />
           </div>
         </div>
