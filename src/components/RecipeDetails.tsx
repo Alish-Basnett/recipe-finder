@@ -8,7 +8,6 @@ interface RecipeDetailProps {
 }
 
 const RecipeDetail: React.FC<RecipeDetailProps> = ({ meal, onClose }) => {
-  // Function to split instructions into individual steps
   const getInstructionsSteps = () => {
     if (!meal.strInstructions) return [];
     return meal.strInstructions
@@ -18,21 +17,21 @@ const RecipeDetail: React.FC<RecipeDetailProps> = ({ meal, onClose }) => {
 
   return (
     <div className="fixed inset-0 bg-black bg-opacity-70 flex items-center justify-center z-50 p-4">
-      <div className="bg-white w-full max-w-7xl h-[80vh] flex rounded-lg shadow-lg overflow-hidden relative">
+      <div className="bg-white w-full max-w-7xl h-[80vh] flex flex-col lg:flex-row rounded-lg shadow-lg overflow-hidden relative">
         <button
           onClick={onClose}
           className="absolute top-4 right-4 text-gray-700 hover:text-gray-900 transition-colors duration-300"
         >
           <FaTimes className="w-8 h-8" />
         </button>
-        <div className="w-2/3 h-full flex-shrink-0">
+        <div className="lg:w-1/2 h-1/2 lg:h-full flex-shrink-0">
           <img
             src={meal.strMealThumb}
             alt={meal.strMeal}
-            className="w-full h-full object-cover border-r border-gray-200"
+            className="w-full h-full object-cover border-b lg:border-b-0 lg:border-r border-gray-200"
           />
         </div>
-        <div className="w-2/3 p-6 overflow-y-auto">
+        <div className="lg:w-1/2 p-6 overflow-y-auto">
           <h2 className="text-4xl font-bold text-gray-900 mb-4">
             {meal.strMeal}
           </h2>
