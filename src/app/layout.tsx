@@ -1,8 +1,8 @@
 // src/app/layout.tsx
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
-import "antd/dist/reset.css"; // Import Ant Design styles
-import "./globals.css"; // Your global styles (including Tailwind CSS)
+import "antd/dist/reset.css"; //
+import "./globals.css"; //
 
 const inter = Inter({ subsets: ["latin"] });
 

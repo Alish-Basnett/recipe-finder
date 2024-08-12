@@ -6,7 +6,12 @@ import SearchBar from "../components/SearchBar";
 import RecipeCard from "../components/RecipeCard";
 import MakeYourOwnRecipe from "../components/MakeYourOwnRecipe";
 import RecipeDetail from "../components/RecipeDetails";
-import { searchMealsByName, getMealsByCategory } from "../api/mealAPIs";
+import {
+  searchMealsByName,
+  getMealsByCategory,
+  lookupMealById,
+} from "../api/mealAPIs";
+import Footer from "@/components/Footer";
 
 const Home: React.FC = () => {
   const [searchQuery, setSearchQuery] = useState("");
@@ -72,10 +77,10 @@ const Home: React.FC = () => {
 
     try {
       if (category === "1") {
-        // "All" category key
         await fetchAllRecipes(); // Fetch all recipes
       } else {
         const results = await getMealsByCategory(category);
+        console.log(results);
         setSearchRecipes(results || []);
       }
     } catch (err) {
@@ -85,9 +90,14 @@ const Home: React.FC = () => {
     }
   };
 
-  const handleRecipeClick = (meal: any) => {
-    setSelectedMeal(meal);
-    setShowDetail(true);
+  const handleRecipeClick = async (meal: any) => {
+    try {
+      const fullMealDetails = await lookupMealById(meal.idMeal); // Fetch full details
+      setSelectedMeal(fullMealDetails);
+      setShowDetail(true);
+    } catch (err) {
+      console.error("Failed to fetch meal details", err);
+    }
   };
 
   const handleCloseDetail = () => {
@@ -142,13 +152,13 @@ const Home: React.FC = () => {
         </div>
 
         <div className="mb-6">
-          <div className="overflow-x-auto whitespace-nowrap flex items-center space-x-4 scrollbar-none">
+          <div className="overflow-hidden flex items-center space-x-4">
             {categories.map((category) => (
               <button
                 key={category}
                 className={`px-4 py-2 rounded-lg border border-gray-300 
                   text-gray-700 hover:bg-gray-200 hover:text-gray-900 transition-colors 
-                  duration-300 ease-in-out whitespace-nowrap ${
+                  duration-300 ease-in-out ${
                     selectedCategory === category
                       ? "bg-blue-500 text-white"
                       : ""
@@ -162,7 +172,7 @@ const Home: React.FC = () => {
               key="1"
               className={`px-4 py-2 rounded-lg border border-gray-300 
                 text-gray-700 hover:bg-gray-200 hover:text-gray-900 transition-colors 
-                duration-300 ease-in-out whitespace-nowrap ${
+                duration-300 ease-in-out ${
                   selectedCategory === "1" ? "bg-blue-500 text-white" : ""
                 }`}
               onClick={() => handleCategoryChange("1")}
@@ -171,7 +181,23 @@ const Home: React.FC = () => {
             </button>
           </div>
 
-          <div className="recipe-list grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 mt-4">
+          {/* Loading indicator */}
+          {searchLoading && (
+            <div className="flex justify-center items-center mt-8">
+              <div className="loader">
+                <div></div>
+                <div></div>
+                <div></div>
+              </div>
+            </div>
+          )}
+
+          {/* Recipe cards */}
+          <div
+            className={`recipe-list grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 mt-4 transition-opacity duration-300 ${
+              searchLoading ? "opacity-50" : "opacity-100"
+            }`}
+          >
             {searchRecipes.map((meal: any) => (
               <RecipeCard
                 key={meal.idMeal}
@@ -187,6 +213,8 @@ const Home: React.FC = () => {
             <RecipeDetail meal={selectedMeal} onClose={handleCloseDetail} />
           </div>
         )}
+
+        <Footer />
       </div>
     </div>
   );
